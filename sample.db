@@ -1,0 +1,18 @@
+employee table
+    employee_id
+    employee_name
+    employee_password
+    department_id
+    
+department table
+    department_id
+    employee_id
+
+customer table
+    customer_id
+    customer_name
+    tel_number
+    postal_code
+    address
+    mail
+
