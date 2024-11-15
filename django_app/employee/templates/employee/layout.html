@@ -1,0 +1,28 @@
+{% load django_browser_reload %}
+{% django_browser_reload_script %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body class="container mx-auto">
+    <header class="text-xl text-right py-3 mb-5">
+        logined: {{login_user}}
+    </header>
+    <main class="text-xl">
+        <section class="text-4xl">{% block subtitle %}{% endblock %}</section>
+        <section>{% block content %}{% endblock %}</section>
+    </main>
+    <footer class="text-center text-sm ">
+        <div class="my-5 text-center">
+            <span class="flex gap-4 justify-center">
+                <a href="/employee/login"> {% if is_login%} [Logout] {% endif %}</a>
+                <span class="float-right">copylight 2024</span>
+            </span>
+        </div>
+    </footer>
+</body>
+</html>
