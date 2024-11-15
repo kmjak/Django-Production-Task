@@ -1,12 +1,12 @@
-employee table
-    employee_id
-    employee_name
-    employee_password
-    department_id
+mployee table
+    employee_id char(6) prmary
+    employee_name varchar(200)
+    employee_password varchar(8-200)
+    department_id char(6) foreingkey
     
 department table
-    department_id
-    employee_id
+    department_id char(6)
+    ## この下にその部署ごとにアクセスできる情報をboolでかく
 
 customer table
     customer_id
@@ -15,4 +15,3 @@ customer table
     postal_code
     address
     mail
-

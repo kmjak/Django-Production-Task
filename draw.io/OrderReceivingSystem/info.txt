@@ -1,4 +1,0 @@
-受注システム: Order_Receiving_System
-    得意先登録: Customer_Registration
-    注文: Order
-    注文履歴確認: Order_History_Inquiry

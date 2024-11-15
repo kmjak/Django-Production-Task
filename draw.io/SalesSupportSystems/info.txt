@@ -1,7 +1,0 @@
-販売支援システム: Sales_Support_System
-    受注情報の管理: Order_Management
-    得意先情報の管理: Customer_Information_Management
-    得意先別受注集計管理: Customer_wise_Order_Summary_Management
-    製品別受注集計管理: Product_wise_Order_Summary_Management
-    得意先別受注履歴一覧: Customer_wise_Order_History_List
-    商品別受注履歴一覧: Product_wise_Order_History_List

@@ -1,3 +1,0 @@
-従業員管理システム: Employee_Management_System
-    従業員情報の管理: Employee_Information_Management
-    部署情報の管理: Department_Information_Management

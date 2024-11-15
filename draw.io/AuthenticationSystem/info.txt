@@ -1,2 +1,0 @@
-認証システム: AuthenticationSystem
-    従業員のログインシステム: Employee_Login_System
