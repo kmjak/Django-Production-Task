@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import EmployeeLoginForm
-from .models import Employee
+from .models import Employee, Sales, Personnel, Production, Product
 
 def login(request):
     if 'employee_id' in request.session:
@@ -42,3 +42,27 @@ def logout(request):
     if 'employee_id' in request.session:
         del request.session['employee_id']
     return redirect('login')
+
+
+def home(request):
+    params = {
+        'title': 'HOME',
+        'subtitle': '機能一覧',
+        'login_user': 'anonymous',
+        'feature': [],
+    }
+
+    employee_id = request.session.get('employee_id')
+
+    if employee_id:
+        try:
+            employee = Employee.objects.get(employee_id=employee_id)
+            params['login_user'] = employee.employee_name
+            access_list = employee.getAccessList()
+            params['feature'] = access_list
+            print(params["feature"])
+
+        except Employee.DoesNotExist:
+            params['login_user'] = 'unknown user'
+
+    return render(request, 'employee/home.html', params)
