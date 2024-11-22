@@ -9,17 +9,24 @@
     <title>{{ title }}</title>
 </head>
 <body class="container mx-auto">
-    <header class="text-xl text-right py-3 mb-5">
-        logined: {{login_user}}
+    <header class="text-xl text-right my-5 flex justify-end">
+        <div class="bg-blue-50 border border-blue-200 rounded-md p-4 mb-8 w-80">
+            <div class="flex items-center justify-center">
+                <svg class="h-5 w-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span class="text-blue-700 font-medium">ログインユーザー: {{ login_user }}</span>
+            </div>
+        </div>
     </header>
     <main class="text-xl">
         <h1 class="text-4xl text-center">{{ subtitle }}</h1>
         <section>{% block content %}{% endblock %}</section>
     </main>
-    <footer class="text-center text-sm ">
+    <footer class="text-center text-md ">
         <div class="my-5 text-center">
             <span class="flex gap-4 justify-center">
-                <a href="/employee/logout"> {% if login_user != "anonymous" %} [Logout] {% endif %}</a>
+                <a href="/employee/logout"> {% if login_user != "anonymous" %} [<span class="text-red-500"> Logout </span>] {% endif %}</a>
                 <span class="float-right">copylight 2024</span>
             </span>
         </div>
