@@ -1,4 +1,12 @@
 create database psysdb;
 use psysdb;
-insert into employee_department values (100000,'アドミン')
+insert into employee_department values (100000,'アドミン');
+insert into employee_department values (200000,'営業部');
+insert into employee_department values (300000,'人事部');
+insert into employee_department values (400000,'生産管理部');
+insert into employee_department values (500000,'製品管理部');
 insert into employee_employee values (100001,'kmjak','kmjak@123',100000);
+insert into employee_employee values (200001,'sales_','kmjak@123',200000);
+insert into employee_employee values (300001,'personnel_','kmjak@123',300000);
+insert into employee_employee values (400001,'production_','kmjak@123',400000);
+insert into employee_employee values (500001,'product_','kmjak@123',500000);
