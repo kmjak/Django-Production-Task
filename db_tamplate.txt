@@ -1,12 +1,27 @@
 create database psysdb;
 use psysdb;
-insert into employee_department values (100000,'アドミン');
-insert into employee_department values (200000,'営業部');
-insert into employee_department values (300000,'人事部');
-insert into employee_department values (400000,'生産管理部');
-insert into employee_department values (500000,'製品管理部');
-insert into employee_employee values (100001,'kmjak','kmjak@123',100000);
-insert into employee_employee values (200001,'sales','kmjak@123',200000);
-insert into employee_employee values (300001,'personnel','kmjak@123',300000);
-insert into employee_employee values (400001,'production','kmjak@123',400000);
-insert into employee_employee values (500001,'product','kmjak@123',500000);
+INSERT INTO employee_department (department_id, department_name) VALUES
+(100000, 'アドミン'),
+(200000, '営業部'),
+(300000, '人事部'),
+(400000, '生産管理部'),
+(500000, '製品管理部');
+
+INSERT INTO employee_employee (employee_id, employee_name, employee_password, department_id) VALUES
+(100001, 'kmjak', 'kmjak@123', 100000),
+(200001, 'sales', 'kmjak@123', 200000),
+(300001, 'personnel', 'kmjak@123', 300000),
+(400001, 'production', 'kmjak@123', 400000),
+(500001, 'product', 'kmjak@123', 500000);
+
+INSERT INTO employee_sales (order_information, customer_information, product_information, stock_information, order_aggregate, department_id, employee_id) VALUES
+(true, true, true, true, true, 200000, 200001);
+
+INSERT INTO employee_personnel (employee_information, division_information, department_id, employee_id) VALUES
+(true, true, 300000, 300001);
+
+INSERT INTO employee_production (production_information, inventory_management_product, arrival_management_product, department_id, employee_id) VALUES
+(true, true, true, 400000, 400001);
+
+INSERT INTO employee_product (product_information, inventory_information, shipping_information, department_id, employee_id) VALUES
+(true, true, true, 500000, 500001);
