@@ -10,8 +10,8 @@ def login(request):
             return redirect('/employee/home')
     params = {
         'title': 'Login',
-        'login_user': 'annoymous',
-        'is_login': False,
+        'subtitle': 'Login',
+        'login_user': 'anonymous',
         'message': '',
         'id': '',
         'name': '',
@@ -37,3 +37,8 @@ def login(request):
             params['message'] = 'フォームに誤りがあります。'
 
     return render(request, 'employee/index.html', params)
+
+def logout(request):
+    if 'employee_id' in request.session:
+        del request.session['employee_id']
+    return redirect('login')

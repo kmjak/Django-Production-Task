@@ -19,7 +19,7 @@
     <footer class="text-center text-sm ">
         <div class="my-5 text-center">
             <span class="flex gap-4 justify-center">
-                <a href="/employee/login"> {% if is_login%} [Logout] {% endif %}</a>
+                <a href="/employee/logout"> {% if login_user != "anonymous" %} [Logout] {% endif %}</a>
                 <span class="float-right">copylight 2024</span>
             </span>
         </div>
