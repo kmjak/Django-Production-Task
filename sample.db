@@ -6,7 +6,38 @@ mployee table
     
 department table
     department_id char(6)
+    department_name varchar(6)
     ## この下にその部署ごとにアクセスできる情報をboolでかく
+
+sales table
+    order_information bool default true
+    customer_information bool default true
+    product_information bool default true
+    stock_information bool default true
+    order_aggregate bool default true
+    department_id foreingkey
+    employee_id foreingkey
+
+personnel table
+    employee_information bool default true
+    division_information bool default true
+    department_id foreingkey
+    employee_id foreingkey
+
+production table
+    production_information bool default true
+    inventory_management_product bool default true
+    arrival_management_product bool default true
+    department_id foreingkey
+    employee_id foreingkey
+
+product table
+    product_information bool default true
+    inventory_information bool default true
+    shipping_information bool default true
+    department_id foreingkey
+    employee_id foreingkey
+
 
 customer table
     customer_id
