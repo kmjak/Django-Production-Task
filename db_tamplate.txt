@@ -1,2 +1,4 @@
 create database psysdb;
 use psysdb;
+insert into employee_department values (100000,'アドミン')
+insert into employee_employee values (100001,'kmjak','kmjak@123',100000);
