@@ -1,17 +1,29 @@
 {% extends 'employee/layout.html' %}
 
 {% block content %}
-    <div class="grid grid-cols-4 gap-6">
-        <div class="max-w-sm rounded-lg shadow-lg bg-white overflow-hidden">
-            <div class="p-6">
-                <h5 class="text-2xl font-semibold text-blue-600 mb-2">{{ customer.customer_name }}</h5>
-                <p class="text-gray-600 mb-2"><strong>電話番号:</strong> {{ customer.tel_number }}</p>
-                <p class="text-gray-600 mb-2"><strong>郵便番号:</strong> {{ customer.postal_code }}</p>
-                <p class="text-gray-600 mb-2"><strong>担当者:</strong> {{ customer.responsible_employee.employee_name }}</p>
-                <div class="mt-4 flex justify-end">
-                    <a href="{% url 'customer_management' customer.customer_id %}" class="text-blue-500 hover:text-blue-700 text-sm">詳細を見る</a>
-                </div>
-            </div>
+    <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+        <div class="mb-6">
+            <a href="{% url 'customer_management' %}" class="text-blue-600 text-sm hover:text-blue-800 hover:underline">&larr; 得意先一覧</a>
+        </div>
+
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold">{{ customer.customer_name }}</h1>
+        </div>
+
+        <div class="space-y-4 mb-6">
+            <p class="text-lg"><strong>電話番号:</strong> {{ customer.tel_number }}</p>
+            <p class="text-lg"><strong>郵便番号:</strong> {{ customer.postal_code }}</p>
+            <p class="text-lg"><strong>住所:</strong> {{ customer.address }}</p>
+            <p class="text-lg"><strong>メールアドレス:</strong> {{ customer.mail }}</p>
+            <p class="text-lg"><strong>担当従業員:</strong> {{ customer.responsible_employee }}</p>
+        </div>
+
+        <div class="flex justify-between">
+            <a href="#" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Edit</a>
+            <form action="" method="post" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Delete</button>
+            </form>
         </div>
     </div>
 {% endblock %}
