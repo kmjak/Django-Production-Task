@@ -1,7 +1,11 @@
 {% extends 'employee/layout.html' %}
 
 {% block content %}
-    <div class="grid grid-cols-4 gap-6">
+    <div class="my-4">
+        <a href="{% url 'home' %}" class="text-blue-600 text-sm hover:text-blue-800">&larr;home</a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {% for customer in customers %}
             <div class="max-w-sm rounded-lg shadow-lg bg-white overflow-hidden">
                 <div class="p-6">
