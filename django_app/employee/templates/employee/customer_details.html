@@ -17,15 +17,16 @@
             <p class="text-lg"><strong>メールアドレス:</strong> {{ customer.mail }}</p>
             <p class="text-lg"><strong>担当従業員:</strong> {{ customer.responsible_employee }}</p>
         </div>
-            <form action="{% url 'customer_delete' customer.customer_id %}" method="POST" class="flex justify-between text-white text-center">
+        <div class="flex justify-between text-white text-center">
+            <button type="submit" class="w-16 h-10 bg-blue-600 rounded-lg hover:bg-blue-700"><a href="{% url 'customer_edit' customer.customer_id %}">edit</a></button>
+            <form action="{% url 'customer_delete' customer.customer_id %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="w-16 h-10 bg-blue-600 rounded-lg hover:bg-blue-700"><a href="{% url 'customer_edit' customer.customer_id %}">edit</a></button>
                 <button type="submit" class="w-16 h-10 bg-red-600 rounded-lg hover:bg-red-700" 
                     onclick="return confirm('本当に削除しますか？');"
                 >
                     delete
                 </button>
-        
             </form>
+        </div>
     </div>
 {% endblock %}
