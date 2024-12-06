@@ -66,10 +66,10 @@ def home(request):
 
     return render(request, 'employee/home.html', params)
 
-def customer_management(request):
+def customers_list(request):
     params = {
-        'title': '[得意先情報]',
-        'subtitle': '得意先情報',
+        'title': '[得意先情報: 一覧]',
+        'subtitle': '得意先情報: 一覧',
         'login_user': 'anonymous',
         'customers': [],
     }
@@ -79,11 +79,30 @@ def customer_management(request):
         try:
             employee = Employee.objects.get(employee_id=employee_id)
             params['login_user'] = employee.employee_name
-            customer = Customer.objects.all()
-            params['customers'] = customer
-
         except Employee.DoesNotExist:
             params['login_user'] = 'unknown user'
+    customer = Customer.objects.all()
+    params['customers'] = customer
 
+    return render(request, 'employee/customers_list.html', params)
 
-    return render(request, 'employee/customer_management.html', params)
+def customer_details(request, pk):
+    params = {
+        'title': '[得意先情報: 一覧]',
+        'subtitle': '得意先情報: 一覧',
+        'login_user': 'anonymous',
+        'customer': [],
+    }
+    employee_id = request.session.get('employee_id')
+
+    if employee_id:
+        try:
+            employee = Employee.objects.get(employee_id=employee_id)
+            params['login_user'] = employee.employee_name
+        except Employee.DoesNotExist:
+            params['login_user'] = 'unknown user'
+    if params['login_user'] != "anonymous":
+        customer = Customer.objects.get(pk=pk)
+        params['customer'] = customer
+
+    return render(request, 'employee/customer_details.html', params)
