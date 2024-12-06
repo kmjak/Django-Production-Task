@@ -103,8 +103,8 @@ def customers_list(request):
 
 def customer_details(request, pk):
     params = {
-        'title': '[得意先情報: 一覧]',
-        'subtitle': '得意先情報: 一覧',
+        'title': '[得意先情報: 詳細]',
+        'subtitle': '得意先情報: 詳細',
         'login_user': 'anonymous',
         'customer': [],
     }
@@ -127,6 +127,7 @@ def customer_details(request, pk):
 
     if params['login_user'] != "anonymous":
         customer = Customer.objects.get(pk=pk)
+        params['title'] = '[得意先情報: 詳細] ' + customer.customer_name
         params['customer'] = customer
 
     if params['login_user'] == "anonymous":
