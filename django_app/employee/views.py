@@ -58,8 +58,10 @@ def home(request):
             employee = Employee.objects.get(employee_id=employee_id)
             params['login_user'] = employee.employee_name
             access_list = employee.getAccessList()
-            access_list.remove({"display_name": "得意先編集", "goto": "customer_edit"})
-            access_list.remove({"display_name": "得意先削除", "goto": "customer_delete"})
+            if {"display_name": "得意先編集", "goto": "customer_edit"} in access_list:
+                access_list.remove({"display_name": "得意先編集", "goto": "customer_edit"})
+            if {"display_name": "得意先削除", "goto": "customer_delete"} in access_list:
+                access_list.remove({"display_name": "得意先削除", "goto": "customer_delete"})
             params['feature'] = access_list
 
         except Employee.DoesNotExist:
@@ -185,7 +187,7 @@ def customer_edit(request, pk):
 
 def customer_delete(request, pk):
     employee_id = request.session.get('employee_id')
-    
+
     if employee_id:
         try:
             employee = Employee.objects.get(employee_id=employee_id)

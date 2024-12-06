@@ -14,6 +14,7 @@ urlpatterns = [
     path('order_aggregate_management_by_product/', views.home, name='order_aggregate_management_by_product'),
     path('order_history_by_customer/', views.home, name='order_history_by_customer'),
     path('order_history_by_product/', views.home, name='order_history_by_product'),
+    path('employee_information/', views.home, name='employee_information'),
     path('division_information/', views.home, name='division_information'),
     path('production_information/', views.home, name='production_information'),
     path('inventory_management_product/', views.home, name='inventory_management_product'),
