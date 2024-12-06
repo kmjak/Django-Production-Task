@@ -37,14 +37,16 @@ class Employee(models.Model):
         if sales_access:
             if sales_access.order_information:
                 access_list.append({"display_name": "受注管理", "goto": "order_management"})
-            if sales_access.customer_information:
+            if sales_access.customer_management:
                 access_list.append({"display_name": "得意先情報", "goto": "customer_management"})
-            if sales_access.product_information:
-                access_list.append({"display_name": "製品情報管理", "goto": "product_management"})
-            if sales_access.stock_information:
-                access_list.append({"display_name": "在庫管理", "goto": "stock_management"})
-            if sales_access.order_aggregate:
-                access_list.append({"display_name": "受注集計", "goto": "order_aggregate"})
+            if sales_access.order_aggregate_by_customer:
+                access_list.append({"display_name": "得意先別受注集計", "goto": "order_aggregate_by_customer"})
+            if sales_access.order_aggregate_management_by_product:
+                access_list.append({"display_name": "製品別受注集計管理", "goto": "order_aggregate_management_by_product"})
+            if sales_access.order_history_by_customer:
+                access_list.append({"display_name": "得意先別受注履歴一覧", "goto": "order_history_by_customer"})
+            if sales_access.order_history_by_product:
+                access_list.append({"display_name": "商品別受注履歴一覧", "goto": "order_history_by_product"})
 
         personnel_access = Personnel.objects.filter(department=department, employee=self.employee_id).first()
         if personnel_access:
@@ -76,10 +78,11 @@ class Employee(models.Model):
 
 class Sales(models.Model):
     order_information = models.BooleanField(default=True)
-    customer_information = models.BooleanField(default=True)
-    product_information = models.BooleanField(default=True)
-    stock_information = models.BooleanField(default=True)
-    order_aggregate = models.BooleanField(default=True)
+    customer_management = models.BooleanField(default=True)
+    order_aggregate_by_customer = models.BooleanField(default=True)
+    order_aggregate_management_by_product = models.BooleanField(default=True)
+    order_history_by_customer = models.BooleanField(default=True)
+    order_history_by_product = models.BooleanField(default=True)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
