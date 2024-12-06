@@ -66,3 +66,7 @@ def home(request):
             params['login_user'] = 'unknown user'
 
     return render(request, 'employee/home.html', params)
+
+def customer_management(request):
+
+    return render(request, 'employee/customer_management.html')
