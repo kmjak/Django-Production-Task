@@ -46,3 +46,4 @@ customer table
     postal_code
     address
     mail
+    responsible_employee_id

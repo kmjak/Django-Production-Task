@@ -117,3 +117,15 @@ class Product(models.Model):
 
     def __str__(self):
         return f"Product Access for {self.employee.employee_name}"
+
+class Customer(models.Model):
+    customer_id = models.CharField(max_length=6, primary_key=True)
+    customer_name = models.CharField(max_length=200)
+    tel_number = models.CharField(max_length=15)
+    postal_code = models.CharField(max_length=10)
+    address = models.CharField(max_length=500)
+    mail = models.EmailField(max_length=200)
+    responsible_employee = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.customer_name
