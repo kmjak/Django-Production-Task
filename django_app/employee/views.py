@@ -53,7 +53,6 @@ def home(request):
     }
 
     employee_id = request.session.get('employee_id')
-
     if employee_id:
         try:
             employee = Employee.objects.get(employee_id=employee_id)
@@ -81,6 +80,15 @@ def customers_list(request):
     if employee_id:
         try:
             employee = Employee.objects.get(employee_id=employee_id)
+            access_list = employee.getAccessList()
+            isAccess = False
+            for access in access_list:
+                if access['goto'] == 'customer_management':
+                    isAccess = True
+                    break
+            if not isAccess:
+                return redirect('/employee/home')
+
             params['login_user'] = employee.employee_name
         except Employee.DoesNotExist:
             return redirect('/employee/login')
@@ -105,6 +113,14 @@ def customer_details(request, pk):
     if employee_id:
         try:
             employee = Employee.objects.get(employee_id=employee_id)
+            access_list = employee.getAccessList()
+            isAccess = False
+            for access in access_list:
+                if access['goto'] == 'customer_management':
+                    isAccess = True
+                    break
+            if not isAccess:
+                return redirect('/employee/home')
             params['login_user'] = employee.employee_name
         except Employee.DoesNotExist:
             return redirect('/employee/login')
