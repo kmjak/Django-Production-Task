@@ -1,3 +1,7 @@
+## terminal
+py .\manage.py migrate  
+
+## mysql
 create database psysdb;
 use psysdb;
 INSERT INTO employee_department (department_id, department_name) VALUES
