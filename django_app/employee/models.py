@@ -38,7 +38,7 @@ class Employee(models.Model):
             if sales_access.order_information:
                 access_list.append({"display_name": "受注管理", "goto": "order_management"})
             if sales_access.customer_information:
-                access_list.append({"display_name": "顧客情報管理", "goto": "customer_management"})
+                access_list.append({"display_name": "得意先情報", "goto": "customer_management"})
             if sales_access.product_information:
                 access_list.append({"display_name": "製品情報管理", "goto": "product_management"})
             if sales_access.stock_information:
