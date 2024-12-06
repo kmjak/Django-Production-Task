@@ -68,5 +68,9 @@ def home(request):
     return render(request, 'employee/home.html', params)
 
 def customer_management(request):
-
-    return render(request, 'employee/customer_management.html')
+    params = {
+        'title': '[得意先情報]',
+        'subtitle': '得意先情報',
+        'login_user': 'anonymous',
+    }
+    return render(request, 'employee/customer_management.html', params)
