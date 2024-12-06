@@ -153,7 +153,7 @@ def customer_edit(request, pk):
             access_list = employee.getAccessList()
             isAccess = False
             for access in access_list:
-                if access['goto'] == 'customer_management':
+                if access['goto'] == 'customer_edit':
                     isAccess = True
                     break
             if not isAccess:
@@ -175,9 +175,34 @@ def customer_edit(request, pk):
         customer.responsible_employee_id = request.POST['responsible_employee']
         customer.save()
         return redirect('/employee/customer_management/' + pk)
+
     if params['login_user'] != "anonymous":
         customer = Customer.objects.get(pk=pk)
         params['title'] = '[得意先情報: 詳細] ' + customer.customer_name
         params['customer'] = customer
 
     return render(request, 'employee/customer_edit.html', params)
+
+def customer_delete(request, pk):
+    employee_id = request.session.get('employee_id')
+    
+    if employee_id:
+        try:
+            employee = Employee.objects.get(employee_id=employee_id)
+            access_list = employee.getAccessList()
+            isAccess = False
+            for access in access_list:
+                if access['goto'] == 'customer_delete':
+                    isAccess = True
+                    break
+            if not isAccess:
+                return redirect('/employee/home')
+        except Employee.DoesNotExist:
+            return redirect('/employee/login')
+    else:
+        return redirect('/employee/login')
+
+    if request.method == 'POST':
+        customer = Customer.objects.get(pk=pk)
+        customer.delete()
+    return redirect('/employee/customer_management/')
