@@ -165,6 +165,16 @@ def customer_edit(request, pk):
     if params['login_user'] == "anonymous":
         return redirect('/employee/login')
 
+    if request.method == 'POST':
+        customer = Customer.objects.get(pk=pk)
+        customer.customer_name = request.POST['customer_name']
+        customer.tel_number = request.POST['tel_number']
+        customer.postal_code = request.POST['postal_code']
+        customer.address = request.POST['address']
+        customer.mail = request.POST['mail']
+        customer.responsible_employee_id = request.POST['responsible_employee']
+        customer.save()
+        return redirect('/employee/customer_management/' + pk)
     if params['login_user'] != "anonymous":
         customer = Customer.objects.get(pk=pk)
         params['title'] = '[得意先情報: 詳細] ' + customer.customer_name
