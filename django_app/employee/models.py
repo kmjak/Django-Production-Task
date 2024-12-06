@@ -93,7 +93,7 @@ class Sales(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Sales Access for {self.employee.employee_name}"
+        return employee.employee_name
 
 
 class Personnel(models.Model):
