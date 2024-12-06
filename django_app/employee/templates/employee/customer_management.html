@@ -1,4 +1,19 @@
 {% extends 'employee/layout.html' %}
 
 {% block content %}
+    <div class="grid grid-cols-4 gap-6">
+        {% for customer in customers %}
+            <div class="max-w-sm rounded-lg shadow-lg bg-white overflow-hidden">
+                <div class="p-6">
+                    <h5 class="text-2xl font-semibold text-blue-600 mb-2">{{ customer.customer_name }}</h5>
+                    <p class="text-gray-600 mb-2"><strong>電話番号:</strong> {{ customer.tel_number }}</p>
+                    <p class="text-gray-600 mb-2"><strong>郵便番号:</strong> {{ customer.postal_code }}</p>
+                    <p class="text-gray-600 mb-2"><strong>担当者:</strong> {{ customer.responsible_employee.employee_name }}</p>
+                    <div class="mt-4 flex justify-end">
+                        <a href="{% url 'customer_management' %}" class="text-blue-500 hover:text-blue-700 text-sm">詳細を見る</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

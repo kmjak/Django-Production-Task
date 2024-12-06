@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import EmployeeLoginForm
-from .models import Employee, Sales, Personnel, Production, Product
+from .models import Employee, Sales, Personnel, Production, Product, Customer
 
 def login(request):
     if 'employee_id' in request.session:
@@ -60,7 +60,6 @@ def home(request):
             params['login_user'] = employee.employee_name
             access_list = employee.getAccessList()
             params['feature'] = access_list
-            print(params["feature"])
 
         except Employee.DoesNotExist:
             params['login_user'] = 'unknown user'
@@ -72,5 +71,19 @@ def customer_management(request):
         'title': '[得意先情報]',
         'subtitle': '得意先情報',
         'login_user': 'anonymous',
+        'customers': [],
     }
+    employee_id = request.session.get('employee_id')
+
+    if employee_id:
+        try:
+            employee = Employee.objects.get(employee_id=employee_id)
+            params['login_user'] = employee.employee_name
+            customer = Customer.objects.all()
+            params['customers'] = customer
+
+        except Employee.DoesNotExist:
+            params['login_user'] = 'unknown user'
+
+
     return render(request, 'employee/customer_management.html', params)
