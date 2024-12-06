@@ -58,6 +58,8 @@ def home(request):
             employee = Employee.objects.get(employee_id=employee_id)
             params['login_user'] = employee.employee_name
             access_list = employee.getAccessList()
+            access_list.remove({"display_name": "得意先編集", "goto": "customer_edit"})
+            access_list.remove({"display_name": "得意先削除", "goto": "customer_delete"})
             params['feature'] = access_list
 
         except Employee.DoesNotExist:
@@ -125,11 +127,47 @@ def customer_details(request, pk):
         except Employee.DoesNotExist:
             return redirect('/employee/login')
 
+    if params['login_user'] == "anonymous":
+        return redirect('/employee/login')
+
     if params['login_user'] != "anonymous":
         customer = Customer.objects.get(pk=pk)
         params['title'] = '[得意先情報: 詳細] ' + customer.customer_name
         params['customer'] = customer
 
+    return render(request, 'employee/customer_details.html', params)
+
+def customer_edit(request, pk):
+    params = {
+        'title': '[得意先情報: 編集]',
+        'subtitle': '得意先情報: 編集',
+        'login_user': 'anonymous',
+        'customer': [],
+        'employees': Sales.objects.all(),
+    }
+    employee_id = request.session.get('employee_id')
+
+    if employee_id:
+        try:
+            employee = Employee.objects.get(employee_id=employee_id)
+            access_list = employee.getAccessList()
+            isAccess = False
+            for access in access_list:
+                if access['goto'] == 'customer_management':
+                    isAccess = True
+                    break
+            if not isAccess:
+                return redirect('/employee/home')
+            params['login_user'] = employee.employee_name
+        except Employee.DoesNotExist:
+            return redirect('/employee/login')
+
     if params['login_user'] == "anonymous":
         return redirect('/employee/login')
-    return render(request, 'employee/customer_details.html', params)
+
+    if params['login_user'] != "anonymous":
+        customer = Customer.objects.get(pk=pk)
+        params['title'] = '[得意先情報: 詳細] ' + customer.customer_name
+        params['customer'] = customer
+
+    return render(request, 'employee/customer_edit.html', params)
