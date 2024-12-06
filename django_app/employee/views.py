@@ -75,8 +75,8 @@ def customers_list(request):
         'login_user': 'anonymous',
         'customers': [],
     }
-    employee_id = request.session.get('employee_id')
 
+    employee_id = request.session.get('employee_id')
     if employee_id:
         try:
             employee = Employee.objects.get(employee_id=employee_id)
@@ -88,8 +88,8 @@ def customers_list(request):
                     break
             if not isAccess:
                 return redirect('/employee/home')
-
             params['login_user'] = employee.employee_name
+
         except Employee.DoesNotExist:
             return redirect('/employee/login')
 
