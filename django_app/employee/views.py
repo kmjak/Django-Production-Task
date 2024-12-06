@@ -62,7 +62,10 @@ def home(request):
             params['feature'] = access_list
 
         except Employee.DoesNotExist:
-            params['login_user'] = 'unknown user'
+            return redirect('/employee/login')
+
+    if params['login_user'] == "anonymous":
+        return redirect('/employee/login')
 
     return render(request, 'employee/home.html', params)
 
@@ -80,10 +83,14 @@ def customers_list(request):
             employee = Employee.objects.get(employee_id=employee_id)
             params['login_user'] = employee.employee_name
         except Employee.DoesNotExist:
-            params['login_user'] = 'unknown user'
+            return redirect('/employee/login')
+
     customer = Customer.objects.all()
     params['customers'] = customer
 
+    if params['login_user'] == "anonymous":
+        return redirect('/employee/login')
+    
     return render(request, 'employee/customers_list.html', params)
 
 def customer_details(request, pk):
@@ -100,9 +107,12 @@ def customer_details(request, pk):
             employee = Employee.objects.get(employee_id=employee_id)
             params['login_user'] = employee.employee_name
         except Employee.DoesNotExist:
-            params['login_user'] = 'unknown user'
+            return redirect('/employee/login')
+
     if params['login_user'] != "anonymous":
         customer = Customer.objects.get(pk=pk)
         params['customer'] = customer
 
+    if params['login_user'] == "anonymous":
+        return redirect('/employee/login')
     return render(request, 'employee/customer_details.html', params)
