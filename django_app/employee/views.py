@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import EmployeeLoginForm
+from .forms import EmployeeLoginForm, CustomerSearchForm
 from .models import Employee, Sales, Personnel, Production, Product, Customer
 
 def login(request):
@@ -78,6 +78,7 @@ def customers_list(request):
         'subtitle': '得意先情報: 一覧',
         'login_user': 'anonymous',
         'customers': [],
+        'form': CustomerSearchForm(),
     }
 
     employee_id = request.session.get('employee_id')

@@ -26,3 +26,13 @@ class EmployeeLoginForm(forms.Form):
             'id': 'password',
         })
     )
+
+class CustomerSearchForm(forms.Form):
+    customer_id = forms.CharField(
+        max_length=6,
+        label="得意先ID",
+        widget=forms.TextInput(attrs={
+            'class': 'block border-2 border-black rounded-lg w-full px-3 py-1 opacity-30 hover:opacity-50 focus:opacity-100 transition-all',
+            'id': 'customer-id',
+        })
+    )
