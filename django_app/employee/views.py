@@ -107,6 +107,11 @@ def customers_list(request):
     return render(request, 'employee/customers_list.html', params)
 
 def customer_details(request, pk=None):
+    if pk is None and request.method == 'POST':
+        form = CustomerSearchForm(request.POST)
+        if form.is_valid():
+            customer_id = form.cleaned_data['customer_id']
+            return redirect('/employee/customer_details/' + customer_id)
     params = {
         'title': '[得意先情報: 詳細]',
         'subtitle': '得意先情報: 詳細',
@@ -134,13 +139,7 @@ def customer_details(request, pk=None):
         return redirect('/employee/login')
 
     if params['login_user'] != "anonymous":
-        if pk:
-            customer = Customer.objects.get(pk=pk)
-        elif request.method == 'POST':
-            form = CustomerSearchForm(request.POST)
-            if form.is_valid():
-                customer_id = form.cleaned_data['customer_id']
-                customer = Customer.objects.get(pk=customer_id)
+        customer = Customer.objects.get(pk=pk)
         params['title'] = '[得意先情報: 詳細] ' + customer.customer_name
         params['customer'] = customer
 
