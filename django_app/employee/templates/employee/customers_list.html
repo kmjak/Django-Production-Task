@@ -4,7 +4,7 @@
     <div class="my-4">
         <a href="{% url 'home' %}" class="text-blue-600 text-sm hover:text-blue-800">&larr;home</a>
     </div>
-    <form action="{% url 'customer_search' %}" class="w-1/2 mx-auto flex justify-center items-end gap-3" method="POST">
+    <form action="{% url 'customer_details' %}" class="w-1/2 mx-auto flex justify-center items-end gap-3" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="w-20 h-10 bg-blue-500 text-white rounded-lg">検索</button>
@@ -18,7 +18,7 @@
                     <p class="text-gray-600 mb-2"><strong>郵便番号:</strong> {{ customer.postal_code }}</p>
                     <p class="text-gray-600 mb-2"><strong>担当者:</strong> {{ customer.responsible_employee.employee_name }}</p>
                     <div class="mt-4 flex justify-end">
-                        <a href="{% url 'customer_search' customer.customer_id %}" class="text-blue-500 hover:text-blue-700 text-sm">詳細を見る</a>
+                        <a href="{% url 'customer_details' customer.customer_id %}" class="text-blue-500 hover:text-blue-700 text-sm">詳細を見る</a>
                     </div>
                 </div>
             </div>
