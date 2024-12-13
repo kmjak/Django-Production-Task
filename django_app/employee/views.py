@@ -117,6 +117,10 @@ def customer_edit(request, pk):
         customer.responsible_employee_id = request.POST['responsible_employee']
         customer.save()
         return redirect('/employee/customer_details/' + pk)
+    else:
+        customer = Customer.objects.get(pk=pk)
+        params['customer'] = customer
+        params['responsible_employee'] = customer.responsible_employee_id
 
     return render(request, 'employee/customer_edit.html', params)
 
