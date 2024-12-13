@@ -141,3 +141,21 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.customer_name
+
+class Item(models.Model):
+    item_id = models.CharField(max_length=6, primary_key=True)
+    item_name = models.CharField(max_length=200)
+    stock = models.IntegerField()
+    fee = models.IntegerField()
+
+    def __str__(self):
+        return self.item_name
+
+class Order(models.Model):
+    nums = models.IntegerField()
+    status = models.CharField(max_length=100)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Order {self.nums} for {self.customer.customer_name} - Status: {self.status}"
