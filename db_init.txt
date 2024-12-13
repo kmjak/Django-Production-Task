@@ -37,8 +37,8 @@ INSERT INTO employee_product (product_information, inventory_information, shippi
 (true, true, true, 500000, 500001);
 
 INSERT INTO employee_customer (customer_id, customer_name, tel_number, postal_code, address, mail, responsible_employee_id) VALUES
-('C1001', 'Customer A', '123-456-7890', '100-0001', 'Tokyo, Japan', 'customerA@mail.com', 200001),
-('C1002', 'Customer B', '234-567-8901', '200-0002', 'Osaka, Japan', 'customerB@mail.com', 200002),
-('C1003', 'Customer C', '345-678-9012', '300-0003', 'Kyoto, Japan', 'customerC@mail.com', 200003),
-('C1004', 'Customer D', '456-789-0123', '400-0004', 'Hokkaido, Japan', 'customerD@mail.com', 200001),
-('C1005', 'Customer E', '567-890-1234', '500-0005', 'Fukuoka, Japan', 'customerE@mail.com', 200002);
+('C10001', 'Customer A', '123-456-7890', '100-0001', 'Tokyo, Japan', 'customerA@mail.com', 200001),
+('C10002', 'Customer B', '234-567-8901', '200-0002', 'Osaka, Japan', 'customerB@mail.com', 200002),
+('C10003', 'Customer C', '345-678-9012', '300-0003', 'Kyoto, Japan', 'customerC@mail.com', 200003),
+('C10004', 'Customer D', '456-789-0123', '400-0004', 'Hokkaido, Japan', 'customerD@mail.com', 200001),
+('C10005', 'Customer E', '567-890-1234', '500-0005', 'Fukuoka, Japan', 'customerE@mail.com', 200002);
