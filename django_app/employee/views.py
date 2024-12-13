@@ -3,11 +3,6 @@ from .forms import EmployeeLoginForm, CustomerSearchForm
 from .models import Employee, Sales, Personnel, Production, Product, Customer
 
 def login(request):
-    if 'employee_id' in request.session:
-        employee_id = request.session.get('employee_id')
-        user = Employee.objects.filter(employee_id=employee_id).first()
-        if user is not None:
-            return redirect('/employee/home')
     params = {
         'title': 'Login',
         'subtitle': 'Login',
@@ -51,24 +46,14 @@ def home(request):
         'login_user': 'anonymous',
         'feature': [],
     }
-
-    employee_id = request.session.get('employee_id')
-    if employee_id:
-        try:
-            employee = Employee.objects.get(employee_id=employee_id)
-            params['login_user'] = employee.employee_name
-            access_list = employee.getAccessList()
-            if {"display_name": "得意先編集", "goto": "customer_edit"} in access_list:
-                access_list.remove({"display_name": "得意先編集", "goto": "customer_edit"})
-            if {"display_name": "得意先削除", "goto": "customer_delete"} in access_list:
-                access_list.remove({"display_name": "得意先削除", "goto": "customer_delete"})
-            params['feature'] = access_list
-
-        except Employee.DoesNotExist:
-            return redirect('/employee/login')
-
-    if params['login_user'] == "anonymous":
-        return redirect('/employee/login')
+    employee = request.user
+    params['login_user'] = employee.employee_name
+    access_list = employee.getAccessList()
+    if {"display_name": "得意先編集", "goto": "customer_edit"} in access_list:
+        access_list.remove({"display_name": "得意先編集", "goto": "customer_edit"})
+    if {"display_name": "得意先削除", "goto": "customer_delete"} in access_list:
+        access_list.remove({"display_name": "得意先削除", "goto": "customer_delete"})
+    params['feature'] = access_list
 
     return render(request, 'employee/home.html', params)
 
@@ -81,28 +66,10 @@ def customers_list(request):
         'form': CustomerSearchForm(),
     }
 
-    employee_id = request.session.get('employee_id')
-    if employee_id:
-        try:
-            employee = Employee.objects.get(employee_id=employee_id)
-            access_list = employee.getAccessList()
-            isAccess = False
-            for access in access_list:
-                if access['goto'] == 'customer_management':
-                    isAccess = True
-                    break
-            if not isAccess:
-                return redirect('/employee/home')
-            params['login_user'] = employee.employee_name
-
-        except Employee.DoesNotExist:
-            return redirect('/employee/login')
-
+    employee = request.user
+    params['login_user'] = employee.employee_name
     customer = Customer.objects.all()
     params['customers'] = customer
-
-    if params['login_user'] == "anonymous":
-        return redirect('/employee/login')
     
     return render(request, 'employee/customers_list.html', params)
 
@@ -118,30 +85,12 @@ def customer_details(request, pk=None):
         'login_user': 'anonymous',
         'customer': [],
     }
-    employee_id = request.session.get('employee_id')
+    employee = request.user
 
-    if employee_id:
-        try:
-            employee = Employee.objects.get(employee_id=employee_id)
-            access_list = employee.getAccessList()
-            isAccess = False
-            for access in access_list:
-                if access['goto'] == 'customer_management':
-                    isAccess = True
-                    break
-            if not isAccess:
-                return redirect('/employee/home')
-            params['login_user'] = employee.employee_name
-        except Employee.DoesNotExist:
-            return redirect('/employee/login')
-
-    if params['login_user'] == "anonymous":
-        return redirect('/employee/login')
-
-    if params['login_user'] != "anonymous":
-        customer = Customer.objects.get(pk=pk)
-        params['title'] = '[得意先情報: 詳細] ' + customer.customer_name
-        params['customer'] = customer
+    params['login_user'] = employee.employee_name
+    customer = Customer.objects.get(pk=pk)
+    params['title'] = '[得意先情報: 詳細] ' + customer.customer_name
+    params['customer'] = customer
 
     return render(request, 'employee/customer_details.html', params)
 
@@ -153,25 +102,8 @@ def customer_edit(request, pk):
         'customer': [],
         'employees': Sales.objects.all(),
     }
-    employee_id = request.session.get('employee_id')
-
-    if employee_id:
-        try:
-            employee = Employee.objects.get(employee_id=employee_id)
-            access_list = employee.getAccessList()
-            isAccess = False
-            for access in access_list:
-                if access['goto'] == 'customer_edit':
-                    isAccess = True
-                    break
-            if not isAccess:
-                return redirect('/employee/home')
-            params['login_user'] = employee.employee_name
-        except Employee.DoesNotExist:
-            return redirect('/employee/login')
-
-    if params['login_user'] == "anonymous":
-        return redirect('/employee/login')
+    employee = request.user
+    params['login_user'] = employee.employee_name
 
     if request.method == 'POST':
         customer = Customer.objects.get(pk=pk)
@@ -184,31 +116,10 @@ def customer_edit(request, pk):
         customer.save()
         return redirect('/employee/customer_details/' + pk)
 
-    if params['login_user'] != "anonymous":
-        customer = Customer.objects.get(pk=pk)
-        params['title'] = '[得意先情報: 詳細] ' + customer.customer_name
-        params['customer'] = customer
-
     return render(request, 'employee/customer_edit.html', params)
 
 def customer_delete(request, pk):
-    employee_id = request.session.get('employee_id')
-
-    if employee_id:
-        try:
-            employee = Employee.objects.get(employee_id=employee_id)
-            access_list = employee.getAccessList()
-            isAccess = False
-            for access in access_list:
-                if access['goto'] == 'customer_delete':
-                    isAccess = True
-                    break
-            if not isAccess:
-                return redirect('/employee/home')
-        except Employee.DoesNotExist:
-            return redirect('/employee/login')
-    else:
-        return redirect('/employee/login')
+    employee = request.user
 
     if request.method == 'POST':
         customer = Customer.objects.get(pk=pk)
