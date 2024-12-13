@@ -51,8 +51,8 @@ INSERT INTO employee_item (item_id, item_name, stock, fee) VALUES
 ('P10005', 'Product E', 120, 2500);
 
 INSERT INTO employee_order (nums, status, item_id, customer_id) VALUES
-(1, 'Pending', 'P10001', 'C1002'),
-(2, 'Shipped', 'P10002', 'C1003'),
-(3, 'Delivered', 'P10003', 'C1004'),
-(4, 'Cancelled', 'P10004', 'C1005'),
-(5, 'Pending', 'P10005', 'C1002');
+(1, 'Pending', 'P10001', 'C10002'),
+(2, 'Shipped', 'P10002', 'C10003'),
+(3, 'Delivered', 'P10003', 'C10004'),
+(4, 'Cancelled', 'P10004', 'C10005'),
+(5, 'Pending', 'P10005', 'C10002');
