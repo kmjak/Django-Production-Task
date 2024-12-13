@@ -152,6 +152,7 @@ class Item(models.Model):
         return self.item_name
 
 class Order(models.Model):
+    order_id = models.AutoField()
     nums = models.IntegerField()
     status = models.CharField(max_length=100)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
