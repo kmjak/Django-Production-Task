@@ -20,7 +20,7 @@ class AclMiddleware:
             if goto == 'home':
                 isAccess = True
             for access in acl:
-                if access['goto'] + "/" == goto:
+                if goto.startswith(access['goto']):
                     isAccess = True
                     break
             if not isAccess:

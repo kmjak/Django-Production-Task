@@ -39,6 +39,8 @@ class Employee(models.Model):
                 access_list.append({"display_name": "受注管理", "goto": "order_management"})
             if sales_access.customer_management:
                 access_list.append({"display_name": "得意先情報", "goto": "customer_management"})
+            if sales_access.customer_details:
+                access_list.append({"display_name": "得意先詳細", "goto": "customer_details"})
             if sales_access.customer_edit:
                 access_list.append({"display_name": "得意先編集", "goto": "customer_edit"})
             if sales_access.customer_delete:
@@ -83,6 +85,7 @@ class Employee(models.Model):
 class Sales(models.Model):
     order_information = models.BooleanField(default=True)
     customer_management = models.BooleanField(default=True)
+    customer_details = models.BooleanField(default=True)
     customer_edit = models.BooleanField(default=True)
     customer_delete = models.BooleanField(default=True)
     order_aggregate_by_customer = models.BooleanField(default=True)

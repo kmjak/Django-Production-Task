@@ -49,6 +49,8 @@ def home(request):
     employee = request.user
     params['login_user'] = employee.employee_name
     access_list = employee.getAccessList()
+    if {"display_name": "得意先詳細", "goto": "customer_details"} in access_list:
+        access_list.remove({"display_name": "得意先詳細", "goto": "customer_details"})
     if {"display_name": "得意先編集", "goto": "customer_edit"} in access_list:
         access_list.remove({"display_name": "得意先編集", "goto": "customer_edit"})
     if {"display_name": "得意先削除", "goto": "customer_delete"} in access_list:
