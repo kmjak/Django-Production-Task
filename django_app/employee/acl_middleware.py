@@ -17,5 +17,18 @@ class AclMiddleware:
             if not path.startswith('/employee/login'):
                 return redirect('/employee/login')
         else:
-            pass
+            acl = user.getAccessList()
+            goto = path[10:]
+            print(goto)
+            print("-------")
+            isAccess = False
+            if goto == 'home':
+                isAccess = True
+            for access in acl:
+                print(access['goto'])
+                if access['goto'] + "/" == goto:
+                    isAccess = True
+                    break
+            if not isAccess:
+                return redirect('/employee/home')
         return response
