@@ -47,3 +47,15 @@ customer table
     address
     mail
     responsible_employee_id
+
+orders table
+    nums int
+    status varchar(100)
+    item_id
+    customer_id
+
+items table
+    item_id cahr(6)
+    item_name varchar(200)
+    stock int
+    fee int

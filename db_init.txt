@@ -42,3 +42,17 @@ INSERT INTO employee_customer (customer_id, customer_name, tel_number, postal_co
 ('C10003', 'Customer C', '345-678-9012', '300-0003', 'Kyoto, Japan', 'customerC@mail.com', 200003),
 ('C10004', 'Customer D', '456-789-0123', '400-0004', 'Hokkaido, Japan', 'customerD@mail.com', 200001),
 ('C10005', 'Customer E', '567-890-1234', '500-0005', 'Fukuoka, Japan', 'customerE@mail.com', 200002);
+
+INSERT INTO employee_item (item_id, item_name, stock, fee) VALUES
+('P10001', 'Product A', 100, 5000),
+('P10002', 'Product B', 200, 10000),
+('P10003', 'Product C', 150, 15000),
+('P10004', 'Product D', 50, 3000),
+('P10005', 'Product E', 120, 2500);
+
+INSERT INTO employee_order (nums, status, item_id, customer_id) VALUES
+(1, 'Pending', 'P10001', 'C1002'),
+(2, 'Shipped', 'P10002', 'C1003'),
+(3, 'Delivered', 'P10003', 'C1004'),
+(4, 'Cancelled', 'P10004', 'C1005'),
+(5, 'Pending', 'P10005', 'C1002');
